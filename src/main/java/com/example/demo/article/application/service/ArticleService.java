@@ -23,12 +23,15 @@ public class ArticleService implements GetArticleUseCase, CreateArticleUseCase, 
     private final LoadArticlePort loadArticlePort;
     private final CommandArticlePort commandArticlePort;
     private final LoadBoardPort loadBoardPort;
+    private final TestMock testMock;
 
-    public ArticleService(LoadArticlePort loadArticlePort, CommandArticlePort commandArticlePort, LoadBoardPort loadBoardPort) {
+    public ArticleService(LoadArticlePort loadArticlePort, CommandArticlePort commandArticlePort, LoadBoardPort loadBoardPort, TestMock testMock) {
         this.loadArticlePort = loadArticlePort;
         this.commandArticlePort = commandArticlePort;
         this.loadBoardPort = loadBoardPort;
+        this.testMock = testMock;
     }
+
 
     @Override
     @Transactional(readOnly = true)

@@ -1,12 +1,5 @@
 package com.example.demo.article.application.service;
 
-import static org.assertj.core.api.BDDAssertions.then;
-import static org.assertj.core.api.BDDAssertions.thenThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willDoNothing;
-import static org.mockito.Mockito.verify;
-
 import com.example.demo.article.adapter.in.api.dto.ArticleDto;
 import com.example.demo.article.adapter.in.api.dto.BoardDto;
 import com.example.demo.article.application.port.out.CommandArticlePort;
@@ -18,10 +11,6 @@ import com.example.demo.article.domain.Board;
 import com.example.demo.article.domain.BoardFixtures;
 import com.example.demo.common.exception.AccessDeniedException;
 import com.example.demo.common.exception.ResourceNotFoundException;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -31,11 +20,27 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.BDDMockito;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.BDDAssertions.then;
+import static org.assertj.core.api.BDDAssertions.thenThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willDoNothing;
+import static org.mockito.Mockito.verify;
+
 @ExtendWith(MockitoExtension.class)
-class ArticleServiceTest {
+class ArticleServiceTest1 {
+
+    @InjectMocks
     private ArticleService sut;
 
     @Mock
@@ -44,12 +49,13 @@ class ArticleServiceTest {
     private CommandArticlePort commandArticlePort;
     @Mock
     private LoadBoardPort loadBoardPort;
+
     @Mock
     private TestMock testMock;
 
     @BeforeEach
     void setUp() {
-        sut = new ArticleService(loadArticlePort, commandArticlePort, loadBoardPort, testMock);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Nested
@@ -59,8 +65,9 @@ class ArticleServiceTest {
         @DisplayName("articleId 로 조회시 Article 반환")
         void return_Article() {
             var article = ArticleFixtures.article();
-            given(loadArticlePort.findArticleById(any(Long.class)))
+            given(loadArticlePort.findArticleById(any()))
                 .willReturn(Optional.of(article));
+
             var result = sut.getArticleById(1L);
 
             then(result)

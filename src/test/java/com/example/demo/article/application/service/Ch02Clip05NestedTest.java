@@ -30,10 +30,12 @@ class Ch02Clip05NestedTest {
     private CommandArticlePort commandArticlePort;
     @Mock
     private LoadBoardPort loadBoardPort;
+    @Mock
+    private TestMock testMock;
 
     @BeforeEach
     void setUp() {
-        sut = new ArticleService(loadArticlePort, commandArticlePort, loadBoardPort);
+        sut = new ArticleService(loadArticlePort, commandArticlePort, loadBoardPort, testMock);
     }
 
     @Test

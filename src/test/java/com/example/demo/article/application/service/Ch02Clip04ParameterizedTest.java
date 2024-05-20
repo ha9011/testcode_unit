@@ -36,9 +36,12 @@ class Ch02Clip04ParameterizedTest {
     @Mock
     private LoadBoardPort loadBoardPort;
 
+    @Mock
+    private TestMock testMock;
+
     @BeforeEach
     void setUp() {
-        sut = new ArticleService(loadArticlePort, commandArticlePort, loadBoardPort);
+        sut = new ArticleService(loadArticlePort, commandArticlePort, loadBoardPort, testMock);
     }
 
     @ParameterizedTest

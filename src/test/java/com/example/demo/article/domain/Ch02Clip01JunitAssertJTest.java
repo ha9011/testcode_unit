@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.BDDAssertions.then;
+
 class Ch02Clip01JunitAssertJTest {
     private Board board;
 
@@ -32,10 +35,10 @@ class Ch02Clip01JunitAssertJTest {
         article.update("new subject", "new content");
 
         // Assert
-        Assertions.assertThat(article.getId())
+        assertThat(article.getId())
             .isEqualTo(1L);
 
-        Assertions.assertThat(article)
+        assertThat(article)
             .hasNoNullFieldsOrProperties()
             .hasFieldOrPropertyWithValue("id", 1L)
             .hasFieldOrPropertyWithValue("board.id", 5L)    // article.getBoard().getId()
@@ -61,7 +64,8 @@ class Ch02Clip01JunitAssertJTest {
         article.update("new subject", "new content");
 
         // Then
-        BDDAssertions.then(article)
+        // BddAssertions
+        then(article)
             .hasNoNullFieldsOrProperties()
             .hasFieldOrPropertyWithValue("id", article.getId())
             .hasFieldOrPropertyWithValue("board.id", article.getBoard().getId())

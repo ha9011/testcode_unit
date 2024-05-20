@@ -31,9 +31,13 @@ class Ch02Clip03ExceptionTest {
 
     private final Board board = BoardFixtures.board();
 
+
+    @Mock
+    private TestMock testMock;
+
     @BeforeEach
     void setUp() {
-        sut = new ArticleService(loadArticlePort, commandArticlePort, loadBoardPort);
+        sut = new ArticleService(loadArticlePort, commandArticlePort, loadBoardPort, testMock);
     }
 
     @Test
